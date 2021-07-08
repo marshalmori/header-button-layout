@@ -2,18 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Header extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color1;
+  final Color color2;
+
+  const Header({
+    @required this.icon,
+    @required this.title,
+    @required this.subtitle,
+    this.color1 = Colors.blueGrey,
+    this.color2 = Colors.grey,
+  });
+
   @override
   Widget build(BuildContext context) {
     final Color whiteColor = Colors.white.withOpacity(0.7);
 
     return Stack(
       children: [
-        _BackgroundHeader(),
+        _BackgroundHeader(
+          color1: this.color1,
+          color2: this.color2,
+        ),
         Positioned(
           top: -50,
           left: -70,
           child: FaIcon(
-            FontAwesomeIcons.plus,
+            this.icon,
             size: 250,
             color: Colors.white.withOpacity(0.12),
           ),
@@ -25,12 +42,12 @@ class Header extends StatelessWidget {
               width: double.infinity,
             ),
             Text(
-              'Suas solicitações',
+              this.subtitle,
               style: TextStyle(fontSize: 20, color: whiteColor),
             ),
             SizedBox(height: 20),
             Text(
-              'Assitência Médica',
+              this.title,
               style: TextStyle(
                   fontSize: 30, color: whiteColor, fontWeight: FontWeight.bold),
             ),
@@ -38,7 +55,7 @@ class Header extends StatelessWidget {
               height: 20,
             ),
             FaIcon(
-              FontAwesomeIcons.plus,
+              this.icon,
               size: 100,
               color: Colors.white,
             )
@@ -50,6 +67,11 @@ class Header extends StatelessWidget {
 }
 
 class _BackgroundHeader extends StatelessWidget {
+  final Color color1;
+  final Color color2;
+
+  const _BackgroundHeader({@required this.color1, @required this.color2});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,8 +84,10 @@ class _BackgroundHeader extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: <Color>[
-            Color(0xff526BF6),
-            Color(0xff67ACF2),
+            this.color1,
+            this.color2,
+            //Color(0xff526BF6),
+            //Color(0xff67ACF2),
           ],
         ),
       ),
